@@ -1,17 +1,13 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
-#include "particle/particle.hpp"
-#include "particle_handler/particle_handler.hpp"
+#include <pe.hpp>
 
 sf::Clock deltaClock;
 sf::Time dt;
 
-
-
 int main(int, char**) {
     sf::RenderWindow window(sf::VideoMode(500,500), "Sand game");
-    // Particle_handler hdl(100, 100, 500, 500);
+    pe::PE eng(50, 50, 500, 500);
 
     while(window.isOpen()) {
         sf::Event event;
@@ -27,8 +23,17 @@ int main(int, char**) {
             }
         }
 
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            sf::Vector2i pos = sf::Mouse::getPosition(window);
+            std::cout << pos.x << " " << pos.y << "\n";
+            eng.set_particle(pos, pe::SAND);
+        }
+
+        eng.update();
+
         window.clear();
-        
+        eng.draw(&window);
         window.display();
 
         dt = deltaClock.restart();
