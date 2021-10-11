@@ -2,12 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include <pe.hpp>
 
+#define DW 1000
+#define DH 1000
+
 sf::Clock deltaClock;
 sf::Time dt;
 
 int main(int, char**) {
-    sf::RenderWindow window(sf::VideoMode(500,500), "Sand game");
-    pe::PE eng(50, 50, 500, 500);
+    sf::RenderWindow window(sf::VideoMode(DW,DH), "Sand game");
+    pe::PE eng(100, 100, DW, DH);
 
     while(window.isOpen()) {
         sf::Event event;
@@ -24,20 +27,18 @@ int main(int, char**) {
         }
 
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        {
-            // sf::Vector2i pos = sf::Mouse::getPosition();
-            std::cout << window.mapPixelToCoords(sf::Mouse::getPosition(window)).x << std::endl;
-            // std::cout << "Button down!" << std::endl;
             eng.set_particle(window.mapPixelToCoords(sf::Mouse::getPosition(window)), pe::SAND);
-        }
 
-        eng.update();
+
+        if(deltaClock.getElapsedTime().asSeconds() >= 0.01)
+        {
+            dt = deltaClock.restart();
+            
+            eng.update();  
+        }
 
         window.clear();
         eng.draw(&window);
-        window.display();
-
-        dt = deltaClock.restart();
-        
+        window.display();        
     }
 }

@@ -10,9 +10,15 @@ namespace pe
     class PE
     {
     private:
-        std::vector<std::vector<pe::particle>> grid;
+        bool bank = 0;
+        std::vector<std::vector<std::vector<pe::particle>>> grid;
 
         sf::Vector2f particle_size;
+
+        void switchBank();
+        void move(int x, int y, int tx, int ty);
+        void swap(int x, int y, int tx, int ty);
+        void remove(int x, int y);
     public:
         PE(int Gw, int Gh, int Sw, int Sh);
         ~PE();
