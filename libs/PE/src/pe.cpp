@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "../inc/pe.hpp"
 
@@ -31,6 +32,7 @@ void PE::update()
     for(int y = 0; y < grid.size(); y ++) 
     for(int x = 0; x < grid[y].size(); x ++)
     {
+        grid[y][x].shape.setPosition(sf::Vector2f(x*particle_size.x, y*particle_size.y));
         switch (grid[y][x].type)
         {
         case NONE:
@@ -56,7 +58,13 @@ void PE::draw(sf::RenderWindow* window)
     }
 }
 
-void PE::set_particle(sf::Vector2i pos, particle_t p)
+void PE::set_particle(sf::Vector2f pos, particle_t p)
 {
-    grid[pos.y/particle_size.y][pos.x/particle_size.x] = {false, false, p, sf::RectangleShape(particle_size), sf::Vector2i(0,0), sf::Vector2i(0,0)};
+    uint x = (uint)(pos.x/particle_size.x);
+    uint y = (uint)(pos.y/particle_size.y);
+
+    std::cout << x << " " << std::endl;
+
+    if(y < grid.size() && x < grid[0].size())
+        grid[y][x] = {false, false, p, sf::RectangleShape(particle_size), sf::Vector2i(0,0), sf::Vector2i(0,0)};
 }

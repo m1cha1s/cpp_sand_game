@@ -25,9 +25,10 @@ int main(int, char**) {
 
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            sf::Vector2i pos = sf::Mouse::getPosition(window);
-            std::cout << pos.x << " " << pos.y << "\n";
-            eng.set_particle(pos, pe::SAND);
+            // sf::Vector2i pos = sf::Mouse::getPosition();
+            std::cout << window.mapPixelToCoords(sf::Mouse::getPosition(window)).x << std::endl;
+            // std::cout << "Button down!" << std::endl;
+            eng.set_particle(window.mapPixelToCoords(sf::Mouse::getPosition(window)), pe::SAND);
         }
 
         eng.update();

@@ -19,7 +19,7 @@ namespace pe
 
         void update();
         void draw(sf::RenderWindow* window);
-        void set_particle(sf::Vector2i pos, particle_t p);
+        void set_particle(sf::Vector2f pos, particle_t p);
     };    
 } // namespace pe
 
