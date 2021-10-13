@@ -9,10 +9,18 @@ namespace pe
     {
         NONE,
         SAND,
+        WATER,
     }particle_t;
+
+    typedef struct
+    {
+        int x;
+        int y;
+    }vector;
 
     typedef struct 
     {
+        bool updated = false;
         bool falling = false;
         bool flying = false;
 

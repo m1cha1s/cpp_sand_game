@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <pe.hpp>
 
-#define DW 1000
-#define DH 1000
+#define DW 500
+#define DH 500
 
 sf::Clock deltaClock;
 sf::Time dt;
@@ -28,9 +28,11 @@ int main(int, char**) {
 
         if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
             eng.set_particle(window.mapPixelToCoords(sf::Mouse::getPosition(window)), pe::SAND);
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
+            eng.set_particle(window.mapPixelToCoords(sf::Mouse::getPosition(window)), pe::WATER);
 
 
-        if(deltaClock.getElapsedTime().asSeconds() >= 0.01)
+        if(deltaClock.getElapsedTime().asSeconds() >= 0.00001)
         {
             dt = deltaClock.restart();
             
@@ -38,7 +40,7 @@ int main(int, char**) {
         }
 
         window.clear();
-        eng.draw(&window);
+        eng.draw(window);
         window.display();        
     }
 }

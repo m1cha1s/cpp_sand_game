@@ -1,7 +1,8 @@
 #ifndef PE_HPP
 #define PE_HPP
 
-#include <vector>
+#include <random>
+#include <unordered_map>
 
 #include "particle.hpp"
 
@@ -11,7 +12,7 @@ namespace pe
     {
     private:
         bool bank = 0;
-        std::vector<std::vector<std::vector<pe::particle>>> grid;
+        std::unordered_map<vector, particle> grid;
 
         sf::Vector2f particle_size;
 
@@ -24,7 +25,7 @@ namespace pe
         ~PE();
 
         void update();
-        void draw(sf::RenderWindow* window);
+        void draw(sf::RenderWindow& window);
         void set_particle(sf::Vector2f pos, particle_t p);
     };    
 } // namespace pe
